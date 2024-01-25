@@ -23,6 +23,7 @@ class Minio {
     required this.endPoint,
     required this.accessKey,
     required this.secretKey,
+    required this.virtualHostStyle,
     int? port,
     this.useSSL = true,
     this.sessionToken,
@@ -80,6 +81,8 @@ class Minio {
 
   /// Set this value to enable tracing. (Optional)
   final bool enableTrace;
+
+  final bool virtualHostStyle;
 
   late MinioClient _client;
   final _regionMap = <String?, String>{};

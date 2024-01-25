@@ -248,7 +248,8 @@ class MinioClient {
       host = getS3Endpoint(minio.region!);
     }
 
-    if (isVirtualHostStyle(host, minio.useSSL, bucket)) {
+    if (minio.virtualHostStyle ||
+        isVirtualHostStyle(host, minio.useSSL, bucket)) {
       if (bucket != null) host = '$bucket.$host';
       if (object != null) path = '/$object';
     } else {
