@@ -122,9 +122,25 @@ String trimDoubleQuote(String str) {
 }
 
 DateTime parseRfc7231Time(String time) {
-  final format = DateFormat('EEE, dd MMM yyyy HH:mm:ss');
-  final isUtc = time.endsWith('GMT');
-  return format.parse(time, isUtc);
+  try {
+    final format = DateFormat('EEE, dd MMM yyyy HH:mm:ss');
+    final isUtc = time.endsWith('GMT');
+    return format.parse(time, isUtc);
+  } catch (e) {}
+
+  try {
+    final format = DateFormat('E, dd MMM yyyy HH:mm:ss', 'en_US');
+    final isUtc = time.endsWith('GMT');
+    return format.parse(time, isUtc);
+  } catch (e) {}
+
+  try {
+    final format = DateFormat('EEE, dd MMM yyyy HH:mm:ss', 'zh');
+    final isUtc = time.endsWith('GMT');
+    return format.parse(time, isUtc);
+  } catch (e) {}
+
+  return DateTime.now();
 }
 
 String toRfc7231Time(DateTime time) {
